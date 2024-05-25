@@ -5,9 +5,17 @@ program
     ;
 
 decl
-    :   INTEGER ident ';'      #intDecl
-    |   BOOL ident ';'         #boolDecl
+    :   INTEGER ident_list ';'      #intDecl
+    |   BOOL ident_list ';'         #boolDecl
+    |   ID 'as' type '(' ident_list ')' '{' statement* '}' #function_call
     ;
+
+type
+    :
+       INTEGER
+       | BOOL
+       | STRING
+      ;
 
 ident_list
     :   ident ( ',' ident )* 
@@ -18,10 +26,9 @@ ident
     ;
 
 statement
-    :   expr '=' expr ';'                 #assign
-    |   PRINT '(' expr ')' ';'              #print
-    |   IF '(' expr ')' '{' statement* '}'  #if
-    |  ID '(' ident ')' '{' statement* '}' #function_call
+    :  expr '=' expr ';'                   #assign
+    |  PRINT '(' expr ')' ';'              #print
+    |  IF '(' expr ')' '{' statement* '}'  #if
     | 'return' expr #return
     ;
 
@@ -42,11 +49,12 @@ expr
     ;
 
 INT     : [0-9]+ ;
+FLOAT   : [0-9]+ '.' [0-9]+ ;
 BOOL    : 'bool';
 INTEGER : 'int';
 PRINT   : 'print';
 IF      : 'if';
 STRING  : '"' .*? '"' ;
-ID      : [a-zA-Z]+ ;
+ID      : [a-zA-Z]+;
 
 WS : [ \t\n\r]+ -> skip ;

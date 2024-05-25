@@ -12,15 +12,15 @@ class TreePrinter(SmallListener):
 
 
 def main(argv):
-    parser = SmallParser(CommonTokenStream(SmallLexer(FileStream(argv[1]))))
+    parser = SmallParser(CommonTokenStream(SmallLexer(FileStream("prueba.txt"))))
     tree = parser.program()
     declarations = DeclareListener()
 
     walker = ParseTreeWalker()
     walker.walk(declarations, tree)
 
-    typecheck = TypecheckListener(declarations.getTypes())
-    walker.walk(typecheck, tree)
+    #typecheck = TypecheckListener(declarations.getTypes())
+    #walker.walk(typecheck, tree)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,8 @@
+public class A {
+    public int metodo () {
+        return 4 + 8 * 7;
+    }
+}
+
+public class B { }
+public class C { }

@@ -20,25 +20,21 @@ class DeclareListener(SmallListener):
         self.declaring = -1
 
     def enterBoolDecl(self, ctx):
-        #self.declaring = BOOL
-        tipo = ctx.getChild(0).getText()
-        nombre = ctx.getChild(1).getText()
+        self.declaring = BOOL
 
-        if nombre in self.types.keys():
-            raise Exception("variable declarada previamente")
-
-        self.types[nombre] = tipo
 
     def exitBoolDecl(self, ctx):
         self.declaring = -1
 
     def enterIdent_list(self, ctx):
         for x in ctx.ident():
+            print("Declarando {}".format(x.ID().getText()))
             self.env.declare(x.ID().getText(), self.declaring)
 
     def exitId(self, ctx):
-        type = self.env.getType(ctx.ID().getText())
-        self.types[ctx] = type
+        #type = self.env.getType(ctx.ID().getText())
+        #self.types[ctx] = type
+        pass
 
 
 
