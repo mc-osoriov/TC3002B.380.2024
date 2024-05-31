@@ -5,7 +5,7 @@ from antlr.SmallListener import SmallListener
 import sys
 
 
-# Listener para ver las declaraciones
+# Listener para ver las declaraciones hola
 class DeclareListener(SmallListener):
     def __init__(self):
         self.variables = {}
