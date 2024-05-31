@@ -45,20 +45,23 @@ class TypecheckListener(SmallListener):
     def enterAssign(self, ctx: SmallParser.AssignContext):
         var_name = ctx.expr(0).getText()
         if var_name not in self.variables:
-            self.errors.append(f"Error: Variable '{var_name}' no declarada.")
+            #self.errors.append(f"Error: Variable '{var_name}' no declarada.")
+            raise Exception("Variable no declarada")
 
     def enterVarInitStmt(self, ctx: SmallParser.VarInitStmtContext):
         var_name = ctx.ID().getText()
         var_type = ctx.type().getText()
         self.funTipo = ctx.type_().getText()
         if var_type != self.funTipo:
-            self.errors.append(f"Error: Asignación de tipo incorrecto a la variable '{var_name}")
+            #self.errors.append(f"Error: Asignación de tipo incorrecto a la variable '{var_name}")
+            raise Exception("Asignación de tipo incorrecto a la variable")
 
     # Declaración de funciones
     def enterFunctionCall(self, ctx: SmallParser.FunctionCallContext):
         func_name = ctx.ID().getText()
         if func_name not in self.functions:
-            self.errors.append(f"Error: Función '{func_name}' no declarada.")
+            #self.errors.append(f"Error: Función '{func_name}' no declarada.")
+            raise Exception("Función no declarada")
 
     # Tipos de dato
     def exitInt(self, ctx: SmallParser.IntContext):
@@ -129,7 +132,7 @@ class TypecheckListener(SmallListener):
 
 
 def main(argv):
-    parser = SmallParser(CommonTokenStream(SmallLexer(FileStream("ejemplo3.txt"))))
+    parser = SmallParser(CommonTokenStream(SmallLexer(FileStream("sinerror.txt"))))
     tree = parser.program()
 
     declarations = DeclareListener()
