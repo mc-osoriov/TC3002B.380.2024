@@ -1,0 +1,27 @@
+int x = 10;
+float y = 3.14;
+string message = "Hello, world!";
+
+int sum(int a, int b) {
+    return 4 + 2;
+}
+
+x = sum(5, 7);
+print(x);
+
+if (x > 10) {
+    print("x is greater than 10");
+} else {
+    print("x is less than or equal to 10");
+}
+
+int i = 0;
+while (i < 5) {
+    print(i);
+}
+
+float f = 2.5 ^ 3;
+print(f);
+
+y = sqrt(16);
+print(y);
